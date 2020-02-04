@@ -80,11 +80,19 @@ output_3 = Dense(3)(output_3)
 #   merge 의 경우 model 을 정의하는 방법
 model = Model(inputs=[input, input2], outputs=[output_1, output_2, output_3])
 model.summary()
-quit()
+# quit()
+
+from keras.callbacks import TensorBoard
+
+callback1 = TensorBoard(log_dir='./graph',
+                          histogram_freq=0,
+                          write_graph=True,
+                          write_images=True)
 
 model.compile(loss='mse', optimizer='adam', metrics=['mse'])
 model.fit([x_train, x2_train], [y_train, y2_train, y3_train], epochs=100, batch_size=1, \
-    validation_data=([x_val, x2_val], [y_val, y2_val, y3_val]))
+    validation_data=([x_val, x2_val], [y_val, y2_val, y3_val]), callbacks=[callback1])
+
 
 result = model.evaluate([x_test, x2_test], [y_test, y2_test, y3_test], batch_size=1)
 print(result) 
