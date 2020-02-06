@@ -93,7 +93,7 @@ x2_val, x2_test, y2_val, y2_test = train_test_split(x2_test, y2_test, test_size=
 #               Modeling            #
 
 from keras.models import Sequential, Model
-from keras.layers import Dense, Input, Flatten, Dropout, LSTM
+from keras.layers import Dense, Input, Flatten, Dropout, LSTM, Conv2D
 from keras.layers.merge import concatenate
 
 model_num = int(input('Press model number : '))
@@ -154,6 +154,13 @@ elif model_num == 4:
     merge = concatenate([model.output, model2.output])
     output3 = Dense(1)(merge)
     model = Model(inputs=[model.input, model2.input], outputs=output3)
+    
+#       5. CNN        #
+elif model_num == 5:
+    model = Sequential()
+    model.add(Conv2D(32, (2,2), padding='same', input_shape(28, 5, 1)))
+    model.add
+    
 
 from keras.callbacks import ModelCheckpoint, EarlyStopping, TensorBoard
 filepath="./model/stock_prediction %s_%s.hdf5" % (input_data_length, model_num)
