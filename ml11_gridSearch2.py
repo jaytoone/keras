@@ -17,9 +17,8 @@ y = iris_data.iloc[:, [-1]]
 print(x.shape, y.shape)
 
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, train_size=0.8, shuffle=True)
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, train_size=0.8, shuffle=True)
 allAlgorithms = all_estimators(type_filter='classifier')
-quit()
 
 kfold_cv = KFold(n_splits=5, shuffle=True)
 
@@ -27,12 +26,12 @@ print(allAlgorithms)
 print(len(allAlgorithms))
 print(type(allAlgorithms))
 
-for(name,algorithm) in allAlgorithms:
-    clf = algorithm()
-    if hasattr(clf, 'score'):
-        scores = cross_val_score(clf, x, y, cv=kfold_cv)
-        print(scores, end=' ')
-        print(name)
+# for(name,algorithm) in allAlgorithms:
+#     clf = algorithm()
+#     if hasattr(clf, 'score'):
+#         scores = cross_val_score(clf, x, y, cv=kfold_cv)
+#         print(scores, end=' ')
+#         print(name)
         
 
 parameters = [

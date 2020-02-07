@@ -46,15 +46,15 @@ kfold_cv = KFold(n_splits=5, shuffle=True)
 # pipe = Pipeline([("classifier", SVC())])
 pipe = Pipeline([('scaler', MinMaxScaler()), ('svm', SVC())])
 
-#           아직 RandomizedSearchCV 해결 못함 !             #
+        #   아직 RandomizedSearchCV 해결 못함 !             #
 # parameters = {'C': [1, 10, 100, 100], 'kernel': ['linear', 'rbf']}
-# model = RandomizedSearchCV(pipe, param_distributions=parameters, n_iter=8, cv=kfold_cv)
-# # model = GridSearchCV(SVC(), parameters, cv=kfold_cv)
-# model.fit(x_train, y_train)
+model = RandomizedSearchCV(pipe, param_distributions=parameters, n_iter=8, cv=kfold_cv)
+# model = GridSearchCV(SVC(), parameters, cv=kfold_cv)
+model.fit(x_train, y_train)
 
-# print('최적 매개 변수 : ', model.best_estimator_)
+print('최적 매개 변수 : ', model.best_estimator_)
 
-# y_pred = model.predict(x_test)
+y_pred = model.predict(x_test)
 # print('최종 정답률 : ', accuracy_score(y_test, y_pred))
 
 pipe.fit(x_train, y_train)
