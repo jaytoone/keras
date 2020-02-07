@@ -111,6 +111,8 @@ model = load_model('model/samsung_stock.hdf5')
 price_today = model.predict(np.array(x[-seq_length:]).reshape(-1, 28, 6))
 print(reverse_min_max_scaling(price, price_today))
 
+#           오늘 종가 : 60150원          #
+
 plt.plot(y_test, 'r')
 plt.plot(y_pred, 'b')
 plt.savefig('model/figure_pred.png')
